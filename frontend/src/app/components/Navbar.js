@@ -7,10 +7,10 @@ export default function Navbar() {
                 <Link href="/">speaktheproductup</Link>
             </div>
             <div className="flex space-x-4">
-                <Link href="/articles" className="hover:underline">
+                <Link href="/articles" className="relative px-4 py-2 rounded-full text-white hover:bg-gray-400 transition duration-300">
                     Articles ✍️
                 </Link>
-                <Link href="/about" className="hover:underline">
+                <Link href="/about" className="relative px-4 py-2 rounded-full text-white hover:bg-gray-400 transition duration-300">
                     About me 👨‍💻
                 </Link>
             </div>

@@ -2,6 +2,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Navbar from './components/Navbar'; 
 import { Montserrat } from "next/font/google";
+import Footer from "./components/Footer";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -37,6 +38,7 @@ export default function RootLayout({ children }) {
 
         {/* Main Content */}
         <main>{children}</main>
+        <Footer />
       </body>
     </html>
   );

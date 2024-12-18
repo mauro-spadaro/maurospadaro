@@ -31,7 +31,7 @@ function AboutMeSection() {
   return (
     <div className="flex flex-col md:flex-row items-center justify-center gap-8 mt-12">
       {/* Text Block */}
-      <div className="bg-red-200 rounded-lg shadow-lg p-8 max-w-md w-full text-center md:text-left flex flex-col justify-center h-full">
+      <div className="bg-red-200 rounded-xl shadow-lg p-8 max-w-md w-full text-center md:text-left flex flex-col justify-center h-full">
         <h2 className="text-2xl font-bold mb-4 text-gray-800">
           Tech and product enthusiast, I strive to solve big problems that have an impact.
         </h2>
@@ -43,10 +43,10 @@ function AboutMeSection() {
           , a Swiss start-up that is leading the AI race in spend management.
         </p>
         {/* Contact Me Button */}
-        <div className="flex items-center justify-center md:justify-start space-x-4">
+        <div className="flex items-center justify-center md:justify space-x-4">
           <a
             href="#contact"
-            className="bg-red-800 text-white px-6 py-3 rounded-lg font-medium shadow-md hover:bg-red-600 transition"
+            className="bg-red-800 text-white px-6 py-3 rounded-3xl font-bold shadow-md"
           >
             Contact me
           </a>
@@ -56,7 +56,7 @@ function AboutMeSection() {
             rel="noopener noreferrer"
             aria-label="LinkedIn"
           >
-            <i className="fab fa-linkedin text-gray-600 text-4xl hover:text-gray-800"></i>
+            <i className="fab fa-linkedin text-gray-800 text-4xl hover:text-gray-200"></i>
           </a>
         </div>
       </div>

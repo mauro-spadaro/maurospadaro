@@ -1,12 +1,17 @@
+export const metadata = {
+  title: "About me",
+  description: "About me page details",
+};
+
 export default function AboutMePage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-100 to-white py-16">
+    <div className="min-h-screen bg-gradient-to-b from-gray-200 to-white py-16">
       {/* Header Section */}
       <div className="container mx-auto px-4">
         <h1 className="text-6xl font-extrabold text-center mb-8 text-gray-800">
           Ciao, I'm Mauro
         </h1>
-        <h2 className="text-2xl font-bold text-center text-gray-500 mb-12">
+        <h2 className="text-3xl font-bold text-center text-gray-500 mb-12">
           Nice to meet you!
         </h2>
 
@@ -14,7 +19,6 @@ export default function AboutMePage() {
         <AboutMeSection />
         {/* About Me Details Section */}
         <AboutMeDetailsSection />
-
         {/* Contact Section */}
         <ContactSection />
       </div>
@@ -72,8 +76,8 @@ function AboutMeSection() {
 // About Me Details Section
 function AboutMeDetailsSection() {
   return (
-    <div className="bg-gray-300 py-1 mt-12">
-        <h1 className="text-6xl font-extrabold text-center mb-8 text-white">
+    <div className="py-5 mt-12">
+        <h1 className="text-6xl font-extrabold text-center mb-8 text-gray-800">
           About me
         </h1>
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 px-4">
@@ -107,8 +111,8 @@ function AboutMeDetailsSection() {
 // Contact Section
 function ContactSection() {
   return (
-    <div className="bg-white py-16 mt-12">
-      <h1 className="text-6xl font-extrabold text-center mb-8 text-gray-300">
+    <div className="py-5 mt-3">
+      <h1 className="text-6xl font-extrabold text-center mb-8 text-gray-800">
           Contacts
         </h1>
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 px-4">

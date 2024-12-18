@@ -48,13 +48,13 @@ export default function Navbar() {
                 <div className="hidden md:flex space-x-4">
                     <Link
                         href="/articles"
-                        className="relative px-4 py-2 rounded-full text-white hover:bg-gray-400 transition duration-300"
+                        className="relative px-4 py-2 rounded-full text-white hover:bg-gray-300 transition duration-300"
                     >
                         Articles ✍️
                     </Link>
                     <Link
                         href="/about"
-                        className="relative px-4 py-2 rounded-full text-white hover:bg-gray-400 transition duration-300"
+                        className="relative px-4 py-2 rounded-full text-white hover:bg-gray-300 transition duration-300"
                     >
                         About me 👨‍💻
                     </Link>

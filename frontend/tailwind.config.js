@@ -10,7 +10,14 @@ module.exports = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        gray: {
+          400: "#ebebeb", //Footer colour
+          500: "#8792a4", //Nice to meet you
+          800: "#333333" //Darker grey
       },
+        red: {
+          500: "#8E7171", // Hover colour
+          800: "#7A3030" // Red for Navbar
     },
   },
   plugins: [],

@@ -31,11 +31,11 @@ function AboutMeSection() {
   return (
     <div className="flex flex-col md:flex-row items-center justify-center gap-8 mt-12">
       {/* Text Block */}
-      <div className="bg-red-100 rounded-lg shadow-lg p-8 max-w-md w-full text-center md:text-left flex flex-col justify-center h-full">
+      <div className="bg-red-200 rounded-lg shadow-lg p-8 max-w-md w-full text-center md:text-left flex flex-col justify-center h-full">
         <h2 className="text-2xl font-bold mb-4 text-gray-800">
           Tech and product enthusiast, I strive to solve big problems that have an impact.
         </h2>
-        <p className="text-gray-600 text-lg mb-6">
+        <p className="text-gray-800 text-lg mb-6">
           Today I am a <span className="font-bold text-gray-800">Product Manager</span> at{' '}
           <a href="https://yokoy.ai" className="text-red-500 underline">
             Yokoy
@@ -46,7 +46,7 @@ function AboutMeSection() {
         <div className="flex items-center justify-center md:justify-start space-x-4">
           <a
             href="#contact"
-            className="bg-red-500 text-white px-6 py-3 rounded-lg font-medium shadow-md hover:bg-red-600 transition"
+            className="bg-red-800 text-white px-6 py-3 rounded-lg font-medium shadow-md hover:bg-red-600 transition"
           >
             Contact me
           </a>

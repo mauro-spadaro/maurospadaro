@@ -12,30 +12,26 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "Title": {
+    "title": {
       "type": "string",
       "required": true
     },
-    "PublishedDate": {
+    "publishedDate": {
       "type": "date",
       "required": true
     },
-    "ReadingTime": {
+    "readingTime": {
       "type": "integer",
       "required": true,
       "min": 1
     },
-    "Slug": {
+    "slug": {
       "type": "uid",
-      "targetField": "Title",
       "required": true
     },
-    "Summary": {
+    "summary": {
       "type": "string",
       "required": true
-    },
-    "Body": {
-      "type": "blocks"
     },
     "tags": {
       "type": "relation",
@@ -43,7 +39,7 @@
       "target": "api::tag.tag",
       "mappedBy": "posts"
     },
-    "Thumbnail": {
+    "thumbnail": {
       "type": "media",
       "multiple": false,
       "required": true,
@@ -53,6 +49,10 @@
         "videos",
         "audios"
       ]
+    },
+    "body": {
+      "type": "richtext",
+      "required": true
     }
   }
 }

@@ -8,7 +8,7 @@ export const metadata = {
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-30 to-white">
+    <div className="min-h-screen bg-white ">
       {/* Header Section */}
       <header className="container mx-auto px-4 py-16 flex flex-col md:flex-row items-center justify-between">
         <div className="text-center md:text-left md:w-1/2">

@@ -60,6 +60,7 @@ export default async function HomePage() {
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-5xl font-extrabold mb-8 text-gray-800">Read the latest</h1>
           {latestArticle ? (
+            <Link href={`/articles/${latestArticle.slug}`}>
             <div className="bg-gray-200 rounded-lg shadow-lg p-6 flex flex-col md:flex-row items-center gap-6 max-w-3xl mx-auto mb-8">
               <div className="w-full md:w-1/3 rounded-lg overflow-hidden">
               <img
@@ -81,6 +82,7 @@ export default async function HomePage() {
                 </p>
               </div>
             </div>
+            </Link>
           ) : (
             <p className="text-gray-600">No latest article found.</p>
           )}

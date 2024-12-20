@@ -12,10 +12,10 @@ export default async function HomePage() {
   try {
     // Fetch the latest article from Strapi API
     const response = await fetch(
-      "http://localhost:1337/api/posts?populate=thumbnail&sort[0]=publishedDate:desc&pagination[page]=1&pagination[pageSize]=1", 
+      `${process.env.NEXT_PUBLIC_API_URL}/api/posts?populate=thumbnail&sort[0]=publishedDate:desc&pagination[page]=1&pagination[pageSize]=1`, 
       {
         headers: {
-          Authorization: `Bearer c1977edc4a07123a8efc71696d910daf2ede0a24ba57a73dfb2329e13529db2afc17329577d11cd2145cf3b032f579bd27f3b1bbc665679eced497a38a00ea779b02cb8a8c6c8c7820064b28bfdb1b2c81211bb0f49b869bebafb480e470de97be5f03bb82c30b59ee59e632d812aacea846ede2b67431862eac24ed0750669c`, // Replace with your actual token
+          Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`, // Replace with your actual token
         },
         next: { revalidate: 60 }, // Revalidate data every 60 seconds
       }

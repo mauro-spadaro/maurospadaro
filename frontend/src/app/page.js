@@ -1,8 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
+import LatestArticleCard  from "./components/LatestArticleCard";
 
 export const metadata = {
-  title: "speaktheproductup",
+  title: "maurospadaro",
   description: "Homepage",
 };
 
@@ -12,7 +13,7 @@ export default async function HomePage() {
   try {
     // Fetch the latest article from Strapi API
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/posts?populate=thumbnail&sort[0]=publishedDate:desc&pagination[page]=1&pagination[pageSize]=1`, 
+      `${process.env.NEXT_PUBLIC_API_URL}/api/posts?populate=thumbnail&populate=tags&sort[0]=publishedDate:desc&pagination[page]=1&pagination[pageSize]=1`, 
       {
         headers: {
           Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`, // Replace with your actual token
@@ -60,29 +61,7 @@ export default async function HomePage() {
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-5xl font-extrabold mb-8 text-gray-800">Read the latest</h1>
           {latestArticle ? (
-            <Link href={`/articles/${latestArticle.slug}`}>
-            <div className="bg-gray-200 rounded-lg shadow-lg p-6 flex flex-col md:flex-row items-center gap-6 max-w-3xl mx-auto mb-8">
-              <div className="w-full md:w-1/3 rounded-lg overflow-hidden">
-              <img
-                src={`http://localhost:1337${latestArticle.thumbnail.url}`}
-                alt={latestArticle.title}
-                className="w-full h-auto"
-              />
-              </div>
-              <div className="text-left md:w-2/3">
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">
-                  {latestArticle.title}
-                </h3>
-                <p className="text-gray-600 text-sm mb-4">
-                  {latestArticle.summary}
-                </p>
-                <p className="text-gray-500 text-sm">
-                  {new Date(latestArticle.publishedDate).toLocaleDateString()} —{" "}
-                  {latestArticle.readingTime} min
-                </p>
-              </div>
-            </div>
-            </Link>
+            <LatestArticleCard article={latestArticle} />
           ) : (
             <p className="text-gray-600">No latest article found.</p>
           )}

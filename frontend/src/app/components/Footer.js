@@ -8,7 +8,7 @@ export default function Footer() {
         <div className="container mx-auto flex flex-col md:flex-row items-center justify-between px-4">
           {/* Copyright Text */}
           <p className="text-gray-600 text-sm font-medium">
-            &copy; {currentYear} <span className="font-bold">speaktheproductup.</span>
+            &copy; {currentYear} <span className="font-bold">maurospadaro.</span>
           </p>
   
           {/* Social Links */}

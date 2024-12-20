@@ -10,7 +10,7 @@ export default function Navbar() {
             <div className="container mx-auto flex justify-between items-center px-6 py-4">
                 {/* Logo */}
                 <div className="text-2xl font-bold">
-                    <Link href="/">speaktheproductup</Link>
+                    <Link href="/">maurospadaro</Link>
                 </div>
 
                 {/* Hamburger Menu Button */}

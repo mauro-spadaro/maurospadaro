@@ -34,7 +34,7 @@ export default async function ArticlePage({ params }) {
       <h1 className="text-4xl font-bold mb-4">{article.attributes.title}</h1>
       {article.attributes.thumbnail && (
         <img
-          src={`http://localhost:1337${article.attributes.thumbnail.data.attributes.url}`}
+          src={`${process.env.NEXT_PUBLIC_API_URL}${article.attributes.thumbnail.data.attributes.url}`}
           alt={article.attributes.title}
           className="w-full rounded-lg mb-6"
         />

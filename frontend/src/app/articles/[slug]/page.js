@@ -1,45 +1,63 @@
-import { notFound } from "next/navigation";
-
 export default async function ArticlePage({ params }) {
   const { slug } = params;
-  let article;
 
   try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/posts?filters[slug][$eq]=${slug}&populate=thumbnail`,
-      {
-        headers: {
-          Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`, // Replace with your actual Strapi token
-        },
-      }
-    );
+    const encodedSlug = encodeURIComponent(slug);
+
+    // Log to debug issues
+    const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/api/posts?filters[slug][$eq]=${encodedSlug}&populate=thumbnail`;
+    console.log("Constructed API URL:", apiUrl);
+
+    const apiToken = process.env.STRAPI_API_TOKEN;
+    if (!apiToken) {
+      console.error("API token is not set.");
+      throw new Error("API token is not set.");
+    }
+    console.log("Authorization Header:", `Bearer ${apiToken}`);
+
+    const response = await fetch(apiUrl, {
+      headers: {
+        Authorization: `Bearer ${apiToken}`,
+      },
+      next: { revalidate: 60 },
+    });
+
+    console.log("Response status:", response.status);
+    console.log("Response headers:", response.headers);
 
     if (!response.ok) {
-      throw new Error("Failed to fetch article");
+      throw new Error(`Failed to fetch article: ${response.statusText}`);
     }
 
-    const result = await response.json();
-    article = result.data[0];
+    const data = await response.json();
+    console.log("API response data:", data);
+
+    const article = data?.data?.[0];
 
     if (!article) {
-      notFound();
+      throw new Error("No article found for the given slug.");
     }
+
+    return (
+      <div>
+        <h1>{article.title}</h1>
+        <p>{article.body}</p>
+        {article.thumbnail && (
+          <img
+            src={`${process.env.NEXT_PUBLIC_API_URL}${article.thumbnail.url}`}
+            alt={article.title}
+          />
+        )}
+      </div>
+    );
   } catch (error) {
     console.error("Error fetching article:", error);
-    notFound();
-  }
 
-  return (
-    <div className="container mx-auto px-4 py-16">
-      <h1 className="text-4xl font-bold mb-4">{article.attributes.title}</h1>
-      {article.attributes.thumbnail && (
-        <img
-          src={`${process.env.NEXT_PUBLIC_API_URL}${article.attributes.thumbnail.data.attributes.url}`}
-          alt={article.attributes.title}
-          className="w-full rounded-lg mb-6"
-        />
-      )}
-      <div dangerouslySetInnerHTML={{ __html: article.attributes.body }} />
-    </div>
-  );
+    return (
+      <div>
+        <h1>Error</h1>
+        <p>Failed to load the article. Please try again later.</p>
+      </div>
+    );
+  }
 }

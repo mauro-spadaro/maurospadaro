@@ -1,3 +1,6 @@
+import ReactMarkdown from "react-markdown";
+import rehypeRaw from "rehype-raw";
+
 export default async function ArticlePage({ params }) {
   const { slug } = params;
 
@@ -5,7 +8,7 @@ export default async function ArticlePage({ params }) {
     const encodedSlug = encodeURIComponent(slug);
 
     // Log to debug issues
-    const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/api/posts?filters[slug][$eq]=${encodedSlug}&populate=thumbnail`;
+    const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/api/posts?filters[slug][$eq]=${encodedSlug}&populate=thumbnail&populate=tags`;
     console.log("Constructed API URL:", apiUrl);
 
     const apiToken = process.env.STRAPI_API_TOKEN;
@@ -39,17 +42,27 @@ export default async function ArticlePage({ params }) {
     }
 
     return (
-      <div>
-        <h1>{article.title}</h1>
-        <p>{article.body}</p>
-        {article.thumbnail && (
-          <img
-            src={`${process.env.NEXT_PUBLIC_API_URL}${article.thumbnail.url}`}
-            alt={article.title}
-          />
-        )}
+      <div className="max-w-4xl mx-auto px-4 py-16" >
+        <div className="text-center">
+          {/* Tag */}
+          <div className="inline-block px-4 py-2 bg-gray-200 text-gray-800 rounded-full text-sm font-medium mb-4">
+          {article.tags[0]?.name || "No Tag"}
+          </div>
+          {/* Title */}
+          <h1 className="text-5xl font-extrabold text-gray-900 mb-4">{article.title}</h1>
+          {/* Summary */}
+          <p className="text-xl text-gray-600 mb-6">{article.summary}</p>
+          {/* Date and Reading Time */}
+          <div className="text-gray-500 text-sm mb-12">
+            {new Date(article.publishedDate).toLocaleDateString()} • {article.readingTime} min
+          </div>
+        </div>
+        {/* Article Body */}
+        <div className="prose prose-lg mx-auto text-left text-gray-800">
+        <ReactMarkdown rehypePlugins={[rehypeRaw]}>{article.body}</ReactMarkdown>
+        </div>
       </div>
-    );
+    );    
   } catch (error) {
     console.error("Error fetching article:", error);
 

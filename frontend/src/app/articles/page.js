@@ -9,7 +9,7 @@ export const metadata = {
     let articles = []; // Default to an empty array
   
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/posts?populate=thumbnail&populate=tags`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/posts?populate=thumbnail&populate=tags&sort=createdAt:desc`, {
         headers: {
           Authorization: `Bearer ${process.env.STRAPI_API_TOKEN} `, // Replace with your actual token
         },

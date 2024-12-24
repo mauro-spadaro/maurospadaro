@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import LatestArticleCard  from "./components/LatestArticleCard";
+import ArticleCard  from "./components/ArticleCard";
 
 export const metadata = {
   title: "maurospadaro",
@@ -61,7 +61,7 @@ export default async function HomePage() {
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-5xl font-extrabold mb-8 text-gray-800">Read the latest</h1>
           {latestArticle ? (
-            <LatestArticleCard article={latestArticle} />
+            <ArticleCard article={latestArticle} />
           ) : (
             <p className="text-gray-600">No latest article found.</p>
           )}

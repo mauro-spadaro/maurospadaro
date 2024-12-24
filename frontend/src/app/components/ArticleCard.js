@@ -1,5 +1,5 @@
 import Link from "next/link";
-export default function LatestArticleCard({ article }) {
+export default function ArticleCard({ article }) {
   return (
       <div className="bg-gray-300 rounded-lg shadow-lg p-6 flex flex-col md:flex-row items-center gap-6 max-w-3xl mx-auto mb-8 cursor-pointer hover:bg-gray-300 transition">
         <div className="w-full md:w-1/3 rounded-lg overflow-hidden">

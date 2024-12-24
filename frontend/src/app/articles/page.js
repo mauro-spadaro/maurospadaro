@@ -1,3 +1,5 @@
+import ArticleCard from '@/app/components/ArticleCard';
+
 export const metadata = {
     title: "Articles",
     description: "All articles page",
@@ -7,7 +9,7 @@ export const metadata = {
     let articles = []; // Default to an empty array
   
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/posts?populate=thumbnail`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/posts?populate=thumbnail&populate=tags`, {
         headers: {
           Authorization: `Bearer ${process.env.STRAPI_API_TOKEN} `, // Replace with your actual token
         },
@@ -43,51 +45,12 @@ export const metadata = {
           </h2>
   
           {articles.length > 0 ? (
-            articles.map((article) => {
-              const { title, summary, publishedDate, readingTime, thumbnail } =
-                article || {};
-  
-              const thumbnailUrl = thumbnail?.url
-                ? `http://localhost:1337${thumbnail.url}`
-                : null;
-  
-              return (
-                <div
-                  key={article.id}
-                  className="bg-gray-200 rounded-lg shadow-lg p-6 flex flex-col md:flex-row items-center gap-6 max-w-3xl mx-auto mb-8"
-                >
-                  {/* Article Thumbnail */}
-                  <div className="w-full md:w-1/3 rounded-lg overflow-hidden">
-                    {thumbnailUrl ? (
-                      <img
-                        src={thumbnailUrl}
-                        alt={title || "Thumbnail"}
-                        className="object-cover w-full h-full"
-                      />
-                    ) : (
-                      <div className="bg-gray-400 w-full h-32 flex items-center justify-center">
-                        <span className="text-4xl text-white font-bold">▶</span>
-                      </div>
-                    )}
-                  </div>
-                  {/* Article Content */}
-                  <div className="text-left md:w-2/3">
-                    <h3 className="text-2xl font-bold text-gray-900 mb-2">
-                      {title || "Untitled"}
-                    </h3>
-                    <p className="text-gray-600 text-sm mb-4">
-                      {summary || "No summary available."}
-                    </p>
-                    <p className="text-gray-500 text-sm">
-                      {publishedDate
-                        ? new Date(publishedDate).toLocaleDateString()
-                        : "Unknown date"}{" "}
-                      — {readingTime || "Unknown"} min
-                    </p>
-                  </div>
-                </div>
-              );
-            })
+            articles.map((article) => (
+              <ArticleCard
+                key={article.id}
+                article={article}
+              />
+            ))
           ) : (
             <p className="text-center text-gray-600">No articles found.</p>
           )}

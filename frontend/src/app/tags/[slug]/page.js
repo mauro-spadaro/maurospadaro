@@ -1,36 +1,52 @@
-/// to be the article page build
-
-
-import ArticleCard from "../../../components/ArticleCard";
+import LatestArticleCard from "../../../components/LatestArticleCard";
 
 export default async function TagPage({ params }) {
-  const { slug } = params;
+  const { slug } = params; // Ensure params is accessed correctly
   let articles = [];
 
   try {
-    // Construct the API URL to fetch articles by tag slug
-    const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/api/posts?filters[tags][slug][$eq]=${encodeURIComponent(slug)}&populate=thumbnail&populate=tags`;
-    console.log("Constructed API URL:", apiUrl);
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:1337';
+    const url = new URL(`${baseUrl}/api/posts`);
+    
+    // Append query parameters
+    url.searchParams.append('filters[tags][slug][$eq]', slug);
+    url.searchParams.append('populate', 'thumbnail');
+    url.searchParams.append('populate', 'tags');
 
-    const response = await fetch(apiUrl, {
+    // Log the constructed URL for debugging
+    console.log('Constructed API URL:', url.toString());
+
+    const apiToken = process.env.STRAPI_API_TOKEN;
+    if (!apiToken) {
+      console.error("API token is not set.");
+      throw new Error("API token is not set.");
+    }
+    console.log("Authorization Header:", `Bearer ${apiToken}`);
+
+    const response = await fetch(url.toString(), {
       headers: {
-        Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,
+        Authorization: `Bearer ${apiToken}`,
+        'Content-Type': 'application/json',
       },
-      next: { revalidate: 60 },
+      next: { revalidate: 60 }
     });
 
-    console.log("Response status:", response.status);
+    // Log response status and headers for debugging
+    console.log('Response status:', response.status);
+    console.log('Response headers:', response.headers);
 
     if (!response.ok) {
       throw new Error(`Failed to fetch articles: ${response.statusText}`);
     }
 
     const result = await response.json();
-    console.log("API response data:", result);
+    console.log('API response data:', result);
 
     articles = result.data || [];
+    console.log('Fetched articles:', articles.length);
+
   } catch (error) {
-    console.error("Error fetching articles for tag:", error);
+    console.error("Error fetching articles:", error);
   }
 
   return (
@@ -41,7 +57,7 @@ export default async function TagPage({ params }) {
         </h1>
         {articles.length > 0 ? (
           articles.map((article) => (
-            <ArticleCard key={article.id} article={article} />
+            <LatestArticleCard key={article.id} article={article} />
           ))
         ) : (
           <p className="text-gray-600 text-center">No articles found for this tag.</p>

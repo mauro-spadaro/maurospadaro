@@ -1,5 +1,4 @@
-import LatestArticleCard from "../../../components/LatestArticleCard";
-
+import ArticleCard from "@/app/components/ArticleCard";
 export default async function TagPage({ params }) {
   const { slug } = params; // Ensure params is accessed correctly
   let articles = [];
@@ -57,7 +56,7 @@ export default async function TagPage({ params }) {
         </h1>
         {articles.length > 0 ? (
           articles.map((article) => (
-            <LatestArticleCard key={article.id} article={article} />
+            <ArticleCard key={article.id} article={article} />
           ))
         ) : (
           <p className="text-gray-600 text-center">No articles found for this tag.</p>

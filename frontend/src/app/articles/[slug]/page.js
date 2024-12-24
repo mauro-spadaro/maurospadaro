@@ -1,4 +1,5 @@
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
 
 export default async function ArticlePage({ params }) {
@@ -57,10 +58,27 @@ export default async function ArticlePage({ params }) {
             {new Date(article.publishedDate).toLocaleDateString()} • {article.readingTime} min
           </div>
         </div>
-        {/* Article Body */}
-        <div className="prose prose-lg mx-auto text-left text-gray-800">
-        <ReactMarkdown rehypePlugins={[rehypeRaw]}>{article.body}</ReactMarkdown>
-        </div>
+
+        {/* Article Content */}
+        <article className="container mx-auto px-4 py-8 prose prose-lg max-w-prose">
+          <ReactMarkdown 
+            remarkPlugins={[remarkGfm]}
+            rehypePlugins={[rehypeRaw]}
+            components={{
+              h1: ({node, ...props}) => <h1 className="text-3xl font-bold mt-8 mb-4" {...props} />,
+              h2: ({node, ...props}) => <h2 className="text-2xl font-bold mt-8 mb-4" {...props} />,
+              p: ({node, ...props}) => <p className="mb-4 text-gray-700 leading-relaxed" {...props} />,
+              blockquote: ({node, ...props}) => (
+                <blockquote className="border-l-4 border-gray-200 pl-4 italic my-4" {...props} />
+              ),
+              img: ({node, ...props}) => (
+                <img className="rounded-lg my-8 w-full" {...props} alt={props.alt || ''} />
+              ),
+            }}
+          >
+            {article.body}
+          </ReactMarkdown>
+        </article>
       </div>
     );    
   } catch (error) {

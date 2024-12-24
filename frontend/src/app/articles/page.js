@@ -31,29 +31,31 @@ export const metadata = {
     return (
       <div className="min-h-screen bg-gradient-to-b from-gray-100 to-white">
         {/* Header Section */}
-        <header className="container mx-auto px-4 py-16 text-center">
+        <header className="container mx-auto px-4 py-12 text-center">
           <h1 className="text-6xl font-extrabold mb-4 text-gray-800">Articles</h1>
-          <p className="text-xl text-gray-600 mb-12">
+          <p className="text-xl text-gray-600">
             Read some of the latest stuff I&apos;ve written ✍️
           </p>
         </header>
   
         {/* Articles Section */}
-        <section className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold mb-8 text-gray-800 text-center">
+        <section className="container mx-auto px-4 pb-16">
+          <h2 className="text-4xl font-bold mb-12 text-gray-800 text-center">
             Latest Releases
           </h2>
   
-          {articles.length > 0 ? (
-            articles.map((article) => (
-              <ArticleCard
-                key={article.id}
-                article={article}
-              />
-            ))
-          ) : (
-            <p className="text-center text-gray-600">No articles found.</p>
-          )}
+          <div className="space-y-8">
+            {articles.length > 0 ? (
+              articles.map((article) => (
+                <ArticleCard
+                  key={article.id}
+                  article={article}
+                />
+              ))
+            ) : (
+              <p className="text-center text-gray-600">No articles found.</p>
+            )}
+          </div>
         </section>
       </div>
     );

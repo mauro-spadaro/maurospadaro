@@ -35,23 +35,30 @@ export default async function HomePage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Header Section */}
-      <header className="container mx-auto px-4 py-16 flex flex-col md:flex-row items-center justify-between">
-        <div className="text-center md:text-left md:w-1/2">
-          <h1 className="text-5xl font-bold mb-4 text-gray-800">
-            Let&apos;s speak.
-            <span className="block text-5xl font-extrabold text-gray-800">speaktheproductup</span>
+      <header className="container mx-auto px-4 py-20 flex flex-col md:flex-row items-center justify-between">
+        <div className="text-center md:text-left md:w-1/2 space-y-6">
+          <h1 className="text-5xl font-extrabold text-gray-800 leading-tight">
+            Writing about tech, <span className="text-blue-600">product</span>, and digital innovation
           </h1>
-          <p className="text-gray-700 text-xl mb-6">
-            Hey 👋 I’m <strong>Mauro</strong>, product and technology enthusiast.
-            <br />
-            Here you will find thoughts and notes of what interests and makes me passionate the most.
+          <p className="text-gray-700 text-xl leading-relaxed">
+            Hey 👋 I'm <strong>Mauro</strong>. I share insights about technology, product development, 
+            and lessons learned building digital products. 
+            As well as some other random stuff. 
           </p>
+          <div className="flex flex-wrap gap-4 justify-center md:justify-start">
+            <Link href="/about" className="inline-flex items-center px-6 py-3 rounded-full bg-gray-900 text-white hover:bg-gray-800 transition-colors">
+              More about me
+            </Link>
+            <Link href="/articles" className="inline-flex items-center px-6 py-3 rounded-full border border-gray-300 hover:bg-gray-50 transition-colors">
+              Read articles
+            </Link>
+          </div>
         </div>
-        <div className="md:w-1/2 flex justify-center">
+        <div className="md:w-1/2 flex justify-center mt-8 md:mt-0">
           <img
             src="/mauro_character.png"
             alt="Character illustration of Mauro"
-            className="w-96 h-auto"
+            className="w-96 h-auto hover:scale-105 transition-transform duration-300"
           />
         </div>
       </header>

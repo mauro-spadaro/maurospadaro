@@ -21,6 +21,11 @@ module.exports = {
           500: "#8E7171", // Hover colour
           800: "#7A3030", // Red for Navbar
         },
+        blue: {
+          200: "#93C1D9", // Blue light
+          500: "#93C1D9", // Blue medium
+          800: "#0C1C5A", // Blue navbar
+        },
       },
     },
   },

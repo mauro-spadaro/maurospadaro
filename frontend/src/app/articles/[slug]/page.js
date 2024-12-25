@@ -1,6 +1,7 @@
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
+import Link from 'next/link';
 
 export default async function ArticlePage({ params }) {
   const { slug } = params;
@@ -46,9 +47,19 @@ export default async function ArticlePage({ params }) {
       <div className="max-w-4xl mx-auto px-4 py-16" >
         <div className="text-center">
           {/* Tag */}
-          <div className="inline-block px-4 py-2 bg-gray-200 text-gray-800 rounded-full text-sm font-medium mb-4">
-          {article.tags[0]?.name || "No Tag"}
-          </div>
+          {article.tags[0]?.name && (
+            <Link 
+              href={`/tags/${article.tags[0].slug}`} 
+              className="inline-block px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 rounded-full text-sm font-medium mb-4 transition-colors hover:underline"
+            >
+              {article.tags[0].name}
+            </Link>
+          )}
+          {!article.tags[0]?.name && (
+            <div className="inline-block px-4 py-2 bg-gray-200 text-gray-800 rounded-full text-sm font-medium mb-4">
+              No Tag
+            </div>
+          )}
           {/* Title */}
           <h1 className="text-5xl font-extrabold text-gray-900 mb-4">{article.title}</h1>
           {/* Summary */}

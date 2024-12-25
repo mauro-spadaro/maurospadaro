@@ -10,7 +10,7 @@ export default function ArticleCard({ article }) {
           />
         </div>
         <div className="text-left md:w-2/3">
-          <Link href={`/articles/${article.tags[0]?.slug}`}>
+          <Link href={`/tags/${article.tags[0]?.slug}`}>
           <div className="inline-block px-3 py-1 bg-gray-200 rounded-full text-xs font-semibold text-gray-800 mb-2 hover:underline">
           {article.tags[0]?.name}
           </div>

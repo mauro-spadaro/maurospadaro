@@ -6,7 +6,7 @@ export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <nav className="bg-red-800 text-white">
+        <nav className="bg-[#0C1C5A] text-white">
             <div className="container mx-auto flex justify-between items-center px-6 py-4">
                 {/* Logo */}
                 <div className="text-2xl font-bold">
@@ -48,13 +48,13 @@ export default function Navbar() {
                 <div className="hidden md:flex space-x-4">
                     <Link
                         href="/articles"
-                        className="relative px-4 py-2 rounded-full text-white hover:bg-red-200 transition duration-300"
+                        className="relative px-4 py-2 rounded-full text-white hover:bg-[#93C1D9]/20 transition duration-300"
                     >
                         Articles ✍️
                     </Link>
                     <Link
                         href="/about"
-                        className="relative px-4 py-2 rounded-full text-white hover:bg-red-200 transition duration-300"
+                        className="relative px-4 py-2 rounded-full text-white hover:bg-[#93C1D9]/20 transition duration-300"
                     >
                         About me 👨‍💻
                     </Link>
@@ -65,7 +65,7 @@ export default function Navbar() {
             <div
                 className={`${
                     isOpen ? 'block' : 'hidden'
-                } md:hidden bg-red-700 px-6 py-4`}
+                } md:hidden bg-[#4682B4] px-6 py-4`}
             >
                 <Link
                     href="/articles"

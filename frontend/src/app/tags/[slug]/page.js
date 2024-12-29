@@ -1,7 +1,44 @@
 import ArticleCard from "@/app/components/ArticleCard";
+
+
+export async function generateMetadata({ params }) {
+  const { slug } = params;
+  try {
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL;
+    const apiUrl = `${baseUrl}/api/posts?filters[tags][slug][$eq]=${encodeURIComponent(slug)}&populate=tags`;
+    
+    const response = await fetch(apiUrl, {
+      headers: {
+        Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,
+      },
+      next: { revalidate: 60 },
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch tag data');
+    }
+
+    const data = await response.json();
+    const tagName = data.data[0]?.tags[0]?.name || slug.charAt(0).toUpperCase() + slug.slice(1);
+
+    return {
+      title: tagName,
+      description: `Articles tagged with ${slug}`,
+    };
+  } catch (error) {
+    console.error('Error generating metadata:', error);
+    return {
+      title: slug.charAt(0).toUpperCase() + slug.slice(1),
+      description: `Articles tagged with ${slug}`,
+    };
+  }
+}
+
+
 export default async function TagPage({ params }) {
   const { slug } = params; // Ensure params is accessed correctly
   let articles = [];
+  let totalArticles = 0;
 
   try {
     const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:1337';
@@ -42,18 +79,25 @@ export default async function TagPage({ params }) {
     console.log('API response data:', result);
 
     articles = result.data || [];
-    console.log('Fetched articles:', articles.length);
+    totalArticles = result.meta?.pagination?.total || articles.length;
+    console.log('Total articles:', totalArticles);
 
   } catch (error) {
     console.error("Error fetching articles:", error);
   }
 
+  // Just get the tag name directly from the first article
+  const tagName = articles[0]?.tags[0]?.name || slug.charAt(0).toUpperCase() + slug.slice(1);
+
   return (
-    <div className="min-h-screen bg-white py-16">
+    <div className="min-h-screen py-16">
       <div className="container mx-auto px-4">
-        <h1 className="text-5xl font-extrabold mb-8 text-gray-800 text-center">
-          Articles tagged with "{slug}"
-        </h1>
+        <div className="text-center mb-12">
+          <h1 className="text-6xl mb-4 font-extrabold text-gray-800">{tagName}</h1>
+          <p className="text-xl text-gray-600 py-4">
+            A collection of {totalArticles} {totalArticles === 1 ? 'post' : 'posts'}
+          </p>
+        </div>
         {articles.length > 0 ? (
           articles.map((article) => (
             <ArticleCard key={article.id} article={article} />

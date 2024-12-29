@@ -29,11 +29,11 @@ export const metadata = {
     }
   
     return (
-      <div className="min-h-screen bg-gradient-to-b from-gray-100 to-white">
+      <div className="min-h-screen">
         {/* Header Section */}
         <header className="container mx-auto px-4 py-12 text-center">
           <h1 className="text-6xl font-extrabold mb-4 text-gray-800">Articles</h1>
-          <p className="text-xl text-gray-600">
+          <p className="text-xl text-gray-600 py-4">
             Read some of the latest stuff I&apos;ve written ✍️
           </p>
         </header>

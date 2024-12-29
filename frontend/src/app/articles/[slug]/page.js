@@ -3,6 +3,42 @@ import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
 import Link from 'next/link';
 
+
+export async function generateMetadata({ params }) {
+  const { slug } = params;
+  try {
+    const encodedSlug = encodeURIComponent(slug);
+    const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/api/posts?filters[slug][$eq]=${encodedSlug}&populate=thumbnail&populate=tags`;
+    
+    const response = await fetch(apiUrl, {
+      headers: {
+        Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,
+      },
+      next: { revalidate: 60 },
+    });
+
+    const data = await response.json();
+    const article = data?.data?.[0];
+
+    if (!article) {
+      return {
+        title: 'Article Not Found',
+        description: 'The requested article could not be found.',
+      };
+    }
+
+    return {
+      title: article.title,
+      description: article.summary,
+    };
+  } catch (error) {
+    return {
+      title: 'Error',
+      description: 'Failed to load article metadata',
+    };
+  }
+}
+
 export default async function ArticlePage({ params }) {
   const { slug } = params;
 
@@ -68,10 +104,13 @@ export default async function ArticlePage({ params }) {
           <div className="text-gray-500 text-sm mb-12">
             {new Date(article.publishedDate).toLocaleDateString()} • {article.readingTime} min
           </div>
+          
+          {/* Separator Line */}
+          <hr className="border-gray-800/20 border-t-3 max-w-3xl mx-auto mb-12" />
         </div>
 
         {/* Article Content */}
-        <article className="container mx-auto px-4 py-8 prose prose-lg max-w-prose">
+        <article className="container mx-auto px-4 py-2 prose prose-lg max-w-prose">
           <ReactMarkdown 
             remarkPlugins={[remarkGfm]}
             rehypePlugins={[rehypeRaw]}

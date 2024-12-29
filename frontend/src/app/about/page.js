@@ -5,7 +5,7 @@ export const metadata = {
 
 export default function AboutMePage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-200 to-white py-16">
+    <div className="py-16">
       {/* Header Section */}
       <div className="container mx-auto px-4">
         <h1 className="text-6xl font-extrabold text-center mb-8 text-gray-800">
@@ -32,13 +32,13 @@ function AboutMeSection() {
     <div className="flex flex-col md:flex-row items-stretch justify-center gap-8 mt-12">
       {/* Text Block */}
       <div className="bg-[#93C1D9]/20 rounded-xl shadow-lg p-12 max-w-md w-full flex flex-col justify-between">
-        <div className="space-y-8">
+        <div className="space-y-24">
           <h2 className="text-3xl font-bold text-gray-800">
             Tech and product enthusiast, I strive to solve big problems that have an impact.
           </h2>
           <p className="text-gray-800 text-xl">
             Today I am a <span className="font-bold">Product Manager</span> at{' '}
-            <a href="https://yokoy.ai" className="text-red-500 underline">
+            <a href="https://yokoy.ai" className="hover:underline">
               Yokoy
             </a>
             , a Swiss start-up that is leading the AI race in spend management.
@@ -46,7 +46,7 @@ function AboutMeSection() {
         </div>
         
         {/* Contact Me Button */}
-        <div className="flex items-center gap-4 mt-8">
+        <div className="flex items-center gap-4 mt-16">
           <a
             href="#contact"
             className="bg-[#0C1C5A] text-white px-6 py-3 rounded-full font-bold shadow-md hover:bg-[#0C1C5A]/40 transition-colors"

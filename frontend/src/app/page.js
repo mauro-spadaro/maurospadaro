@@ -33,7 +33,7 @@ export default async function HomePage() {
   }
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen">
       {/* Header Section */}
       <header className="container mx-auto px-4 py-20 flex flex-col md:flex-row items-center justify-between">
         <div className="text-center md:text-left md:w-1/2 space-y-6">
@@ -46,10 +46,10 @@ export default async function HomePage() {
             As well as some other random stuff. 
           </p>
           <div className="flex flex-wrap gap-4 justify-center md:justify-start">
-            <Link href="/about" className="inline-flex items-center px-6 py-3 rounded-full bg-gray-900 text-white hover:bg-gray-800 transition-colors">
+            <Link href="/about" className="inline-flex items-center px-6 py-3 rounded-full bg-blue-800 text-white hover:bg-blue-800/80 transition-colors">
               More about me
             </Link>
-            <Link href="/articles" className="inline-flex items-center px-6 py-3 rounded-full border border-gray-300 hover:bg-gray-50 transition-colors">
+            <Link href="/articles" className="inline-flex items-center px-6 py-3 rounded-full bg-white border border-gray-300 text-gray-600 shadow hover:bg-gray-100 transition">
               Read articles
             </Link>
           </div>
@@ -58,13 +58,13 @@ export default async function HomePage() {
           <img
             src="/mauro_character.png"
             alt="Character illustration of Mauro"
-            className="w-96 h-auto hover:scale-105 transition-transform duration-300"
+            className="w-96 h-auto"
           />
         </div>
       </header>
 
       {/* Latest Articles Section */}
-      <section className="bg-white py-16">
+      <section className="py-16">
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-5xl font-extrabold mb-8 text-gray-800">Read the latest</h1>
           {latestArticle ? (
@@ -72,12 +72,6 @@ export default async function HomePage() {
           ) : (
             <p className="text-gray-600">No latest article found.</p>
           )}
-          {/* All Articles Button */}
-          <Link href="/articles">
-            <button className="bg-white border border-gray-300 text-gray-600 px-6 py-3 rounded-full shadow hover:bg-gray-100 transition">
-              All articles...
-            </button>
-          </Link>
         </div>
       </section>
     </div>

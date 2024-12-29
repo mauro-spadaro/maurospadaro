@@ -36,12 +36,14 @@ export default function RootLayout({ children }) {
       <body
         className={`${montserrat.variable} font-sans antialiased`}
       >
-        {/* Add Navbar Here */}
-        <Navbar />
+        <div className="min-h-screen bg-gradient-to-b from-gray-200 to-white">
+          {/* Add Navbar Here */}
+          <Navbar />
 
-        {/* Main Content */}
-        <main>{children}</main>
-        <Footer />
+          {/* Main Content */}
+          <main>{children}</main>
+          <Footer />
+        </div>
       </body>
     </html>
   );

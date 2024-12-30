@@ -65,17 +65,17 @@ export default function Navbar() {
             <div
                 className={`${
                     isOpen ? 'block' : 'hidden'
-                } md:hidden bg-[#4682B4] px-6 py-4`}
+                } md:hidden bg-blue-800 px-6 py-4`}
             >
                 <Link
                     href="/articles"
-                    className="block py-2 text-white hover:bg-red-600 rounded transition duration-300"
+                    className="block py-2 text-white hover:bg-[#93C1D9]/20 hover:underline rounded transition duration-300 text-center"
                 >
                     Articles ✍️
                 </Link>
                 <Link
                     href="/about"
-                    className="block py-2 text-white hover:bg-red-600 rounded transition duration-300"
+                    className="block py-2 text-white hover:bg-[#93C1D9]/20 hover:underline rounded transition duration-300 text-center"
                 >
                     About me 👨‍💻
                 </Link>

@@ -48,7 +48,7 @@ function AboutMeSection() {
         {/* Contact Me Button */}
         <div className="flex items-center gap-4 mt-16">
           <a
-            href="#contact"
+            href="mailto:spadaro.mauro@gmail.com"
             className="bg-[#0C1C5A] text-white px-6 py-3 rounded-full font-bold shadow-md hover:bg-[#0C1C5A]/40 transition-colors"
           >
             Contact me
@@ -105,7 +105,7 @@ function AboutMeDetailsSection() {
           <p className="text-gray-800 mb-8 text-lg">
             👨‍🎓 Economist by education, technologist by passion. I like to try out things myself, you can have a look at my{' '}
             <span className="font-bold">Github</span> repos{' '}
-            <a href="#" className="text-black underline">here</a>.
+            <a href="https://github.com/mauro-spadaro" className="text-black underline">here</a>.
           </p>
           <p className="text-gray-800 mb-8 text-lg">
             💻 Before working in Product, I tried different things in various industries. In 2020, I contributed launching a no-profit consulting platform called{' '}
@@ -133,7 +133,7 @@ function ContactSection() {
           <h3 className="font-bold text-lg mb-4 text-gray-800">📧 Email</h3>
           <p className="text-gray-800 text-lg">
             If you have any question or want to chat, click{' '}
-            <a href="#" className="text-black underline">
+            <a href="mailto:spadaro.mauro@gmail.com" className="text-black underline">
               here
             </a>
             .
@@ -143,7 +143,7 @@ function ContactSection() {
           <h3 className="font-bold text-lg mb-4 text-gray-800">☕ In person</h3>
           <p className="text-gray-800 text-lg">
             Find me in Zurich! Let's grab a coffee. Reach out to me via{' '}
-            <a href="#" className="text-black underline">
+            <a href="mailto:spadaro.mauro@gmail.com" className="text-black underline">
               mail
             </a>
             .
@@ -153,7 +153,7 @@ function ContactSection() {
           <h3 className="font-bold text-lg mb-4 text-gray-800">💬 Social network</h3>
           <p className="text-gray-800 text-lg">
             Connect with me on{' '}
-            <a href="https://www.linkedin.com" className="text-black underline">
+            <a href="https://www.linkedin.com/in/mauro-spadaro/" className="text-black underline">
               LinkedIn
             </a>
             .

@@ -1,6 +1,13 @@
 export const metadata = {
   title: "About me",
-  description: "About me page details",
+  description:
+    "Meet Mauro Spadaro — Product Manager at Yokoy, tech enthusiast, and writer on product management and digital innovation.",
+  openGraph: {
+    title: "About me | maurospadaro",
+    description:
+      "Meet Mauro Spadaro — Product Manager at Yokoy, tech enthusiast, and writer on product management and digital innovation.",
+    url: "https://maurospadaro.com/about",
+  },
 };
 
 export default function AboutMePage() {
@@ -92,8 +99,8 @@ function AboutMeDetailsSection() {
           </p>
           <p className="text-gray-800 mb-8 text-lg">
             🤝 Since April 2022 I am <span className="font-bold">Community Coordinator</span> for the{' '}
-            <span className="font-bold">Fintech Product Guild</span>, a community of 100+ senior fintench product 
-            people, acrooss Europe and US.
+            <span className="font-bold">Fintech Product Guild</span>, a community of 100+ senior fintech product
+            people, across Europe and US.
           </p>
           <p className="text-gray-800 mb-8 text-lg">
             ✈️ My journey in Product started with{' '}

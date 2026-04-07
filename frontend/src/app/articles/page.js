@@ -2,7 +2,14 @@ import ArticleCard from '@/app/components/ArticleCard';
 
 export const metadata = {
     title: "Articles",
-    description: "All articles page",
+    description:
+      "Browse all articles by Mauro Spadaro on tech, product management, and digital innovation.",
+    openGraph: {
+      title: "Articles | maurospadaro",
+      description:
+        "Browse all articles by Mauro Spadaro on tech, product management, and digital innovation.",
+      url: "https://maurospadaro.com/articles",
+    },
   };
   
   export default async function ArticlesPage() {

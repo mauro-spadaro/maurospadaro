@@ -27,9 +27,27 @@ export async function generateMetadata({ params }) {
       };
     }
 
+    const thumbnailUrl = article.thumbnail?.url
+      ? `https://maurospadaro.com${article.thumbnail.url}`
+      : null;
+
     return {
       title: article.title,
       description: article.summary,
+      openGraph: {
+        type: "article",
+        title: article.title,
+        description: article.summary,
+        url: `https://maurospadaro.com/articles/${slug}`,
+        ...(thumbnailUrl && { images: [{ url: thumbnailUrl }] }),
+        publishedTime: article.publishedDate,
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: article.title,
+        description: article.summary,
+        ...(thumbnailUrl && { images: [thumbnailUrl] }),
+      },
     };
   } catch (error) {
     return {
@@ -79,7 +97,46 @@ export default async function ArticlePage({ params }) {
       throw new Error("No article found for the given slug.");
     }
 
+    const thumbnailUrl = article.thumbnail?.url
+      ? `https://maurospadaro.com${article.thumbnail.url}`
+      : null;
+
+    const jsonLd = {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": article.title,
+      "description": article.summary,
+      "datePublished": article.publishedDate,
+      "dateModified": article.updatedAt || article.publishedDate,
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": `https://maurospadaro.com/articles/${slug}`,
+      },
+      ...(thumbnailUrl && {
+        "image": {
+          "@type": "ImageObject",
+          "url": thumbnailUrl,
+        },
+      }),
+      "author": {
+        "@type": "Person",
+        "name": "Mauro Spadaro",
+        "url": "https://maurospadaro.com/about",
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "Mauro Spadaro",
+        "url": "https://maurospadaro.com",
+      },
+      "url": `https://maurospadaro.com/articles/${slug}`,
+    };
+
     return (
+      <>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
       <div className="max-w-4xl mx-auto px-4 py-16" >
         <div className="text-center">
           {/* Tag */}
@@ -111,7 +168,7 @@ export default async function ArticlePage({ params }) {
 
         {/* Article Content */}
         <article className="container mx-auto px-4 py-2 prose prose-lg max-w-prose">
-          <ReactMarkdown 
+          <ReactMarkdown
             remarkPlugins={[remarkGfm]}
             rehypePlugins={[rehypeRaw]}
             components={{
@@ -130,7 +187,8 @@ export default async function ArticlePage({ params }) {
           </ReactMarkdown>
         </article>
       </div>
-    );    
+      </>
+    );
   } catch (error) {
     console.error("Error fetching article:", error);
 

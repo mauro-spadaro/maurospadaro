@@ -3,8 +3,17 @@ import Link from "next/link";
 import ArticleCard  from "./components/ArticleCard";
 
 export const metadata = {
-  title: "maurospadaro",
-  description: "Homepage",
+  title: {
+    absolute: "Mauro Spadaro",
+  },
+  description:
+    "Writing about tech, product management, and digital innovation. Follow Mauro Spadaro, Product Manager building digital products.",
+  openGraph: {
+    title: "Mauro Spadaro",
+    description:
+      "Writing about tech, product management, and digital innovation. Follow Mauro Spadaro, Product Manager building digital products.",
+    url: "https://maurospadaro.com",
+  },
 };
 
 export default async function HomePage() {

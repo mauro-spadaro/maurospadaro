@@ -174,12 +174,23 @@ export default async function ArticlePage({ params }) {
             components={{
               h1: ({node, ...props}) => <h1 className="text-3xl font-bold mt-8 mb-4" {...props} />,
               h2: ({node, ...props}) => <h2 className="text-2xl font-bold mt-8 mb-4" {...props} />,
-              p: ({node, ...props}) => <p className="mb-4 text-gray-700 leading-relaxed" {...props} />,
+              p: ({node, children, ...props}) => {
+                const hasImage = node.children?.some(c => c.tagName === 'img');
+                if (hasImage) return <>{children}</>;
+                return <p className="mb-4 text-gray-700 leading-relaxed" {...props}>{children}</p>;
+              },
               blockquote: ({node, ...props}) => (
                 <blockquote className="border-l-4 border-gray-200 pl-4 italic my-4" {...props} />
               ),
               img: ({node, ...props}) => (
-                <img className="rounded-lg my-8 w-full" {...props} alt={props.alt || ''} />
+                <figure className="my-8">
+                  <img className="rounded-lg w-full" {...props} alt={props.alt || ''} />
+                  {props.title && (
+                    <figcaption className="text-center text-sm text-gray-500 mt-2 italic">
+                      {props.title}
+                    </figcaption>
+                  )}
+                </figure>
               ),
             }}
           >

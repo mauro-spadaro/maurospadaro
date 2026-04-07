@@ -1,11 +1,11 @@
 export const metadata = {
   title: "About me",
   description:
-    "Meet Mauro Spadaro — Product Manager at Yokoy, tech enthusiast, and writer on product management and digital innovation.",
+    "Meet Mauro Spadaro — Product Manager at Perk, tech enthusiast, and writer on product management and digital innovation.",
   openGraph: {
     title: "About me | maurospadaro",
     description:
-      "Meet Mauro Spadaro — Product Manager at Yokoy, tech enthusiast, and writer on product management and digital innovation.",
+      "Meet Mauro Spadaro — Product Manager at Perk, tech enthusiast, and writer on product management and digital innovation.",
     url: "https://maurospadaro.com/about",
   },
 };
@@ -45,10 +45,10 @@ function AboutMeSection() {
           </h2>
           <p className="text-gray-800 text-xl">
             Today I am a <span className="font-bold">Product Manager</span> at{' '}
-            <a href="https://yokoy.ai" className="hover:underline">
-              Yokoy
+            <a href="https://www.perk.com" className="hover:underline">
+              Perk
             </a>
-            , a Swiss start-up that is leading the AI race in spend management.
+            , leading the Reporting & Analytics product stream from Barcelona.
           </p>
         </div>
         
@@ -94,11 +94,11 @@ function AboutMeDetailsSection() {
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-8 px-4">
         <div>
           <p className="text-gray-800 mb-8 text-lg">
-            🚀 I am currently working in a Sequoia-backed Swiss start-up named <span className="font-bold">Yokoy</span> as a{' '}
-            <span className="font-bold">Product Manager</span>.
+            🚀 I am currently working at <span className="font-bold">Perk</span> as a{' '}
+            <span className="font-bold">Product Manager</span>, leading the Reporting & Analytics stream from Barcelona.
           </p>
           <p className="text-gray-800 mb-8 text-lg">
-            🤝 Since April 2022 I am <span className="font-bold">Community Coordinator</span> for the{' '}
+            🤝 Since March 2022 I am <span className="font-bold">Community Coordinator</span> for the{' '}
             <span className="font-bold">Fintech Product Guild</span>, a community of 100+ senior fintech product
             people, across Europe and US.
           </p>
@@ -149,7 +149,7 @@ function ContactSection() {
         <div className="text-center">
           <h3 className="font-bold text-lg mb-4 text-gray-800">☕ In person</h3>
           <p className="text-gray-800 text-lg">
-            Find me in Zurich! Let's grab a coffee. Reach out to me via{' '}
+            Find me in Barcelona! Let's grab a coffee. Reach out to me via{' '}
             <a href="mailto:spadaro.mauro@gmail.com" className="text-black underline">
               mail
             </a>

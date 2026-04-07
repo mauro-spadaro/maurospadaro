@@ -1,9 +1,10 @@
 import localFont from "next/font/local";
 import "./globals.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import Navbar from './components/Navbar'; 
+import Navbar from './components/Navbar';
 import { Montserrat } from "next/font/google";
 import Footer from "./components/Footer";
+import { Analytics } from "@vercel/analytics/react";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -61,6 +62,7 @@ export default function RootLayout({ children }) {
           <main>{children}</main>
           <Footer />
         </div>
+        <Analytics />
       </body>
     </html>
   );

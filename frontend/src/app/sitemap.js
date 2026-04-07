@@ -1,6 +1,8 @@
+import { getAllArticles } from '@/lib/articles';
+
 const BASE_URL = 'https://maurospadaro.com';
 
-export default async function sitemap() {
+export default function sitemap() {
   const staticRoutes = [
     {
       url: BASE_URL,
@@ -22,27 +24,13 @@ export default async function sitemap() {
     },
   ];
 
-  try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/posts?fields[0]=slug&fields[1]=updatedAt&pagination[pageSize]=100`,
-      {
-        headers: { Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}` },
-        next: { revalidate: 3600 },
-      }
-    );
+  const articles = getAllArticles();
+  const articleRoutes = articles.map((article) => ({
+    url: `${BASE_URL}/articles/${article.slug}`,
+    lastModified: new Date(article.publishedDate),
+    changeFrequency: 'monthly',
+    priority: 0.8,
+  }));
 
-    if (!response.ok) return staticRoutes;
-
-    const data = await response.json();
-    const articleRoutes = (data?.data ?? []).map((post) => ({
-      url: `${BASE_URL}/articles/${post.slug}`,
-      lastModified: new Date(post.updatedAt),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    }));
-
-    return [...staticRoutes, ...articleRoutes];
-  } catch {
-    return staticRoutes;
-  }
+  return [...staticRoutes, ...articleRoutes];
 }

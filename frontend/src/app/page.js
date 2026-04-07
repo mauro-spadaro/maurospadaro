@@ -1,6 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
-import ArticleCard  from "./components/ArticleCard";
+import ArticleCard from "./components/ArticleCard";
+import { getAllArticles } from "@/lib/articles";
 
 export const metadata = {
   title: {
@@ -16,30 +16,9 @@ export const metadata = {
   },
 };
 
-export default async function HomePage() {
-  let latestArticle = null;
-
-  try {
-    // Fetch the latest article from Strapi API
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/posts?populate=thumbnail&populate=tags&sort[0]=publishedDate:desc&pagination[page]=1&pagination[pageSize]=1`, 
-      {
-        headers: {
-          Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`, // Replace with your actual token
-        },
-        next: { revalidate: 60 }, // Revalidate data every 60 seconds
-      }
-    );
-
-    if (!response.ok) {
-      throw new Error(`Failed to fetch latest article: ${response.statusText}`);
-    }
-
-    const result = await response.json();
-    latestArticle = result.data?.[0] || null; // Fetch the first (latest) article
-  } catch (error) {
-    console.error("Error fetching the latest article:", error);
-  }
+export default function HomePage() {
+  const articles = getAllArticles();
+  const latestArticle = articles[0] || null;
 
   return (
     <div className="min-h-screen">
@@ -50,9 +29,9 @@ export default async function HomePage() {
             Writing about tech, <span className="text-blue-600">product</span>, and digital innovation
           </h1>
           <p className="text-gray-700 text-xl leading-relaxed">
-            Hey 👋 I'm <strong>Mauro</strong>. I share insights about technology, product development, 
-            and lessons learned building digital products. 
-            As well as some other random stuff. 
+            Hey 👋 I'm <strong>Mauro</strong>. I share insights about technology, product development,
+            and lessons learned building digital products.
+            As well as some other random stuff.
           </p>
           <div className="flex flex-wrap gap-4 justify-center md:justify-start">
             <Link href="/about" className="inline-flex items-center px-6 py-3 rounded-full bg-blue-800 text-white hover:bg-blue-800/80 transition-colors">

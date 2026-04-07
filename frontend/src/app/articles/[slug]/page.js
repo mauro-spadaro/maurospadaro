@@ -2,153 +2,108 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
 import Link from 'next/link';
+import { getAllArticles, getArticleBySlug } from '@/lib/articles';
 
+export async function generateStaticParams() {
+  const articles = getAllArticles();
+  return articles.map(a => ({ slug: a.slug }));
+}
 
 export async function generateMetadata({ params }) {
   const { slug } = params;
-  try {
-    const encodedSlug = encodeURIComponent(slug);
-    const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/api/posts?filters[slug][$eq]=${encodedSlug}&populate=thumbnail&populate=tags`;
-    
-    const response = await fetch(apiUrl, {
-      headers: {
-        Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,
-      },
-      next: { revalidate: 60 },
-    });
+  const article = getArticleBySlug(slug);
 
-    const data = await response.json();
-    const article = data?.data?.[0];
-
-    if (!article) {
-      return {
-        title: 'Article Not Found',
-        description: 'The requested article could not be found.',
-      };
-    }
-
-    const thumbnailUrl = article.thumbnail?.url
-      ? `https://maurospadaro.com${article.thumbnail.url}`
-      : null;
-
+  if (!article) {
     return {
-      title: article.title,
-      description: article.summary,
-      openGraph: {
-        type: "article",
-        title: article.title,
-        description: article.summary,
-        url: `https://maurospadaro.com/articles/${slug}`,
-        ...(thumbnailUrl && { images: [{ url: thumbnailUrl }] }),
-        publishedTime: article.publishedDate,
-      },
-      twitter: {
-        card: "summary_large_image",
-        title: article.title,
-        description: article.summary,
-        ...(thumbnailUrl && { images: [thumbnailUrl] }),
-      },
-    };
-  } catch (error) {
-    return {
-      title: 'Error',
-      description: 'Failed to load article metadata',
+      title: 'Article Not Found',
+      description: 'The requested article could not be found.',
     };
   }
+
+  return {
+    title: article.title,
+    description: article.summary,
+    openGraph: {
+      type: "article",
+      title: article.title,
+      description: article.summary,
+      url: `https://maurospadaro.com/articles/${slug}`,
+      ...(article.thumbnail && { images: [{ url: `https://maurospadaro.com${article.thumbnail}` }] }),
+      publishedTime: article.publishedDate,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: article.title,
+      description: article.summary,
+      ...(article.thumbnail && { images: [`https://maurospadaro.com${article.thumbnail}`] }),
+    },
+  };
 }
 
-export default async function ArticlePage({ params }) {
+export default function ArticlePage({ params }) {
   const { slug } = params;
+  const article = getArticleBySlug(slug);
 
-  try {
-    const encodedSlug = encodeURIComponent(slug);
-
-    // Log to debug issues
-    const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/api/posts?filters[slug][$eq]=${encodedSlug}&populate=thumbnail&populate=tags`;
-    console.log("Constructed API URL:", apiUrl);
-
-    const apiToken = process.env.STRAPI_API_TOKEN;
-    if (!apiToken) {
-      console.error("API token is not set.");
-      throw new Error("API token is not set.");
-    }
-    console.log("Authorization Header:", `Bearer ${apiToken}`);
-
-    const response = await fetch(apiUrl, {
-      headers: {
-        Authorization: `Bearer ${apiToken}`,
-      },
-      next: { revalidate: 60 },
-    });
-
-    console.log("Response status:", response.status);
-    console.log("Response headers:", response.headers);
-
-    if (!response.ok) {
-      throw new Error(`Failed to fetch article: ${response.statusText}`);
-    }
-
-    const data = await response.json();
-    console.log("API response data:", data);
-
-    const article = data?.data?.[0];
-
-    if (!article) {
-      throw new Error("No article found for the given slug.");
-    }
-
-    const thumbnailUrl = article.thumbnail?.url
-      ? `https://maurospadaro.com${article.thumbnail.url}`
-      : null;
-
-    const jsonLd = {
-      "@context": "https://schema.org",
-      "@type": "Article",
-      "headline": article.title,
-      "description": article.summary,
-      "datePublished": article.publishedDate,
-      "dateModified": article.updatedAt || article.publishedDate,
-      "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": `https://maurospadaro.com/articles/${slug}`,
-      },
-      ...(thumbnailUrl && {
-        "image": {
-          "@type": "ImageObject",
-          "url": thumbnailUrl,
-        },
-      }),
-      "author": {
-        "@type": "Person",
-        "name": "Mauro Spadaro",
-        "url": "https://maurospadaro.com/about",
-      },
-      "publisher": {
-        "@type": "Person",
-        "name": "Mauro Spadaro",
-        "url": "https://maurospadaro.com",
-      },
-      "url": `https://maurospadaro.com/articles/${slug}`,
-    };
-
+  if (!article) {
     return (
-      <>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
-      <div className="max-w-4xl mx-auto px-4 py-16" >
+      <div>
+        <h1>Article Not Found</h1>
+        <p>The requested article could not be found.</p>
+      </div>
+    );
+  }
+
+  const thumbnailUrl = article.thumbnail
+    ? `https://maurospadaro.com${article.thumbnail}`
+    : null;
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": article.title,
+    "description": article.summary,
+    "datePublished": article.publishedDate,
+    "dateModified": article.publishedDate,
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `https://maurospadaro.com/articles/${slug}`,
+    },
+    ...(thumbnailUrl && {
+      "image": {
+        "@type": "ImageObject",
+        "url": thumbnailUrl,
+      },
+    }),
+    "author": {
+      "@type": "Person",
+      "name": "Mauro Spadaro",
+      "url": "https://maurospadaro.com/about",
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Mauro Spadaro",
+      "url": "https://maurospadaro.com",
+    },
+    "url": `https://maurospadaro.com/articles/${slug}`,
+  };
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <div className="max-w-4xl mx-auto px-4 py-16">
         <div className="text-center">
           {/* Tag */}
-          {article.tags[0]?.name && (
-            <Link 
-              href={`/tags/${article.tags[0].slug}`} 
+          {article.tags?.[0]?.name ? (
+            <Link
+              href={`/tags/${article.tags[0].slug}`}
               className="inline-block px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 rounded-full text-sm font-medium mb-4 transition-colors hover:underline"
             >
               {article.tags[0].name}
             </Link>
-          )}
-          {!article.tags[0]?.name && (
+          ) : (
             <div className="inline-block px-4 py-2 bg-gray-200 text-gray-800 rounded-full text-sm font-medium mb-4">
               No Tag
             </div>
@@ -161,7 +116,7 @@ export default async function ArticlePage({ params }) {
           <div className="text-gray-500 text-sm mb-12">
             {new Date(article.publishedDate).toLocaleDateString()} • {article.readingTime} min
           </div>
-          
+
           {/* Separator Line */}
           <hr className="border-gray-800/20 border-t-3 max-w-3xl mx-auto mb-12" />
         </div>
@@ -198,16 +153,6 @@ export default async function ArticlePage({ params }) {
           </ReactMarkdown>
         </article>
       </div>
-      </>
-    );
-  } catch (error) {
-    console.error("Error fetching article:", error);
-
-    return (
-      <div>
-        <h1>Error</h1>
-        <p>Failed to load the article. Please try again later.</p>
-      </div>
-    );
-  }
+    </>
+  );
 }

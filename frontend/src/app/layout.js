@@ -5,6 +5,7 @@ import Navbar from './components/Navbar';
 import { Montserrat } from "next/font/google";
 import Footer from "./components/Footer";
 import { Analytics } from "@vercel/analytics/react";
+import GoogleAnalytics from "./components/GoogleAnalytics";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -63,6 +64,7 @@ export default function RootLayout({ children }) {
           <Footer />
         </div>
         <Analytics />
+        <GoogleAnalytics measurementId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
       </body>
     </html>
   );

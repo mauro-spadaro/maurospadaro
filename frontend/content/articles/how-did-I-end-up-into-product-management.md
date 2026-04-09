@@ -53,7 +53,7 @@ It did not take me too long to figure things out, and faster than I thought, I w
 
 # Learning, learning
 
-![View from office.jpeg](http://localhost:1337/uploads/View_from_office_86371127c6.jpeg "A view from the office in London")
+![View from office.jpeg](/uploads/View_from_office_86371127c6.jpeg "A view from the office in London")
 
 And so it began. Summer 2021, my first experience working abroad. I rapidly fell in love with London and the thousands of opportunities it offers. Less so with the weather, which during those months had not been particularly favorable to me.
 
@@ -91,7 +91,7 @@ It was not easy though. Even if I was quite certain that banking was not really 
 It was in that precise instance though that mentors and friends really helped me figure out what I could do next. And if I were to give you a piece of advice, it would be to build a solid circle of "advisors" whom you can count on. In my case, it really helped me to discover new jobs and get the right confidence infusion I needed to make that path change.
 
 I discovered what "Product" is quite randomly. One night, I was spending some time out in Milan with friends from the university association I was part of. Between one beer and the other, we started chatting about what we were doing and wanted to do next. "I build digital things," my friend said. "But are you an engineer or what?" I replied sarcastically. "Not really, but I work with them to figure out what we should build." It did not really take much more than those words to convince me that the guy was really working on something cool, something that involved an interdisciplinary set of skills that would have allowed me to unleash my passion for technology, which had been dormant. "I am a Product Manager."
-![Milan](http://localhost:1337/uploads/IMG_20220505_WA_0011_d89bb42437.jpg "A gloomy Milan dome")
+![Milan](/uploads/IMG_20220505_WA_0011_d89bb42437.jpg "A gloomy Milan dome")
 ‍
 
 The spell was cast. I started to devour all the content on LinkedIn, trying to figure out what this was all about and, most importantly, if I could do it. If I, a business student, could effectively join the mission of building delightful digital experiences with very little coding experience. And mentors here came in as fundamental. Between the months I decided to reject the return offer at the bank (a 70k+ entry-level offer) and landing my first product internship, it was hard. I had zero certainty that what I had in mind could become a reality, with good peace of my imposter syndrome. Mentors helped though. They kept reassuring me that Product Management, as I had learned from my friend, could be a very rewarding and great career and that I did not necessarily need a Computer Science degree to break in.

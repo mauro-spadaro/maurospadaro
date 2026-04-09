@@ -5,6 +5,7 @@ export const metadata = {
   title: "Articles",
   description:
     "Browse all articles by Mauro Spadaro on tech, product management, and digital innovation.",
+  alternates: { canonical: "https://maurospadaro.com/articles" },
   openGraph: {
     title: "Articles | maurospadaro",
     description:

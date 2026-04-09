@@ -8,6 +8,7 @@ export const metadata = {
   },
   description:
     "Mauro Spadaro — Product Manager at Perk, writing about product management, fintech, and tech. Based in Barcelona.",
+  alternates: { canonical: "https://maurospadaro.com" },
   openGraph: {
     title: "Mauro Spadaro",
     description:

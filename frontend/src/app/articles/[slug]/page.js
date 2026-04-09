@@ -5,6 +5,8 @@ import Link from 'next/link';
 import { getAllArticles, getArticleBySlug } from '@/lib/articles';
 import ReadingProgressBar from '@/app/components/ReadingProgressBar';
 import ArticleCard from '@/app/components/ArticleCard';
+import ShareButtons from '@/app/components/ShareButtons';
+import BackToTop from '@/app/components/BackToTop';
 
 export async function generateStaticParams() {
   const articles = getAllArticles();
@@ -16,37 +18,39 @@ export async function generateMetadata({ params }) {
   const article = getArticleBySlug(slug);
 
   if (!article) {
-    return {
-      title: 'Article Not Found',
-      description: 'The requested article could not be found.',
-    };
+    return { title: 'Article Not Found', description: 'The requested article could not be found.' };
   }
+
+  const thumbnailUrl = article.thumbnail
+    ? `https://maurospadaro.com${article.thumbnail}`
+    : 'https://maurospadaro.com/opengraph-image';
 
   return {
     title: article.title,
     description: article.summary,
+    alternates: {
+      canonical: `https://maurospadaro.com/articles/${slug}`,
+    },
     openGraph: {
       type: "article",
       title: article.title,
       description: article.summary,
       url: `https://maurospadaro.com/articles/${slug}`,
-      ...(article.thumbnail && { images: [{ url: `https://maurospadaro.com${article.thumbnail}` }] }),
+      images: [{ url: thumbnailUrl, width: 1200, height: 630, alt: article.title }],
       publishedTime: article.publishedDate,
     },
     twitter: {
       card: "summary_large_image",
       title: article.title,
       description: article.summary,
-      ...(article.thumbnail && { images: [`https://maurospadaro.com${article.thumbnail}`] }),
+      images: [thumbnailUrl],
     },
   };
 }
 
 function formatDate(dateStr) {
   return new Date(dateStr).toLocaleDateString('en-GB', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
+    day: 'numeric', month: 'long', year: 'numeric',
   });
 }
 
@@ -69,7 +73,6 @@ export default function ArticlePage({ params }) {
     ? `https://maurospadaro.com${article.thumbnail}`
     : null;
 
-  // Related articles: same tag, exclude current
   const allArticles = getAllArticles();
   const tagSlugs = (article.tags || []).map(t => t.slug);
   const related = allArticles
@@ -83,56 +86,56 @@ export default function ArticlePage({ params }) {
     "description": article.summary,
     "datePublished": article.publishedDate,
     "dateModified": article.publishedDate,
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": `https://maurospadaro.com/articles/${slug}`,
-    },
-    ...(thumbnailUrl && {
-      "image": { "@type": "ImageObject", "url": thumbnailUrl },
-    }),
-    "author": {
-      "@type": "Person",
-      "name": "Mauro Spadaro",
-      "url": "https://maurospadaro.com/about",
-    },
-    "publisher": {
-      "@type": "Person",
-      "name": "Mauro Spadaro",
-      "url": "https://maurospadaro.com",
-    },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": `https://maurospadaro.com/articles/${slug}` },
+    ...(thumbnailUrl && { "image": { "@type": "ImageObject", "url": thumbnailUrl } }),
+    "author": { "@type": "Person", "name": "Mauro Spadaro", "url": "https://maurospadaro.com/about" },
+    "publisher": { "@type": "Person", "name": "Mauro Spadaro", "url": "https://maurospadaro.com" },
     "url": `https://maurospadaro.com/articles/${slug}`,
   };
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <ReadingProgressBar />
+      <BackToTop />
+
       <div className="max-w-4xl mx-auto px-4 py-16">
         <div className="text-center">
           {/* Tag */}
-          {article.tags?.[0]?.name ? (
+          {article.tags?.[0]?.name && (
             <Link
               href={`/tags/${article.tags[0].slug}`}
               className="inline-block px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 rounded-full text-sm font-medium mb-4 transition-colors hover:underline"
             >
               {article.tags[0].name}
             </Link>
-          ) : null}
+          )}
 
           {/* Title */}
           <h1 className="text-5xl font-extrabold text-gray-900 mb-4">{article.title}</h1>
           {/* Summary */}
           <p className="text-xl text-gray-600 mb-6">{article.summary}</p>
           {/* Date and Reading Time */}
-          <div className="text-gray-500 text-sm mb-12">
+          <div className="text-gray-500 text-sm mb-8">
             {formatDate(article.publishedDate)} · {article.readingTime} min read
           </div>
 
-          <hr className="border-gray-800/20 border-t-3 max-w-3xl mx-auto mb-12" />
+          {/* Share buttons */}
+          <ShareButtons title={article.title} slug={slug} />
+
+          <hr className="border-gray-800/20 mt-10 mb-12" />
         </div>
+
+        {/* Hero thumbnail */}
+        {article.thumbnail && (
+          <div className="mb-12 rounded-2xl overflow-hidden shadow-md">
+            <img
+              src={article.thumbnail}
+              alt={article.title}
+              className="w-full h-auto object-cover"
+            />
+          </div>
+        )}
 
         {/* Article Content */}
         <article className="container mx-auto px-4 py-2 prose prose-lg max-w-prose">
@@ -166,9 +169,15 @@ export default function ArticlePage({ params }) {
           </ReactMarkdown>
         </article>
 
+        {/* Share buttons bottom */}
+        <div className="mt-12 border-t border-gray-200 pt-10">
+          <p className="text-center text-gray-600 font-medium mb-2">Enjoyed this article?</p>
+          <ShareButtons title={article.title} slug={slug} />
+        </div>
+
         {/* Related Articles */}
         {related.length > 0 && (
-          <div className="mt-20 border-t border-gray-200 pt-16">
+          <div className="mt-16">
             <h2 className="text-3xl font-extrabold text-gray-800 mb-10 text-center">More to read</h2>
             <div className="space-y-6">
               {related.map(a => (

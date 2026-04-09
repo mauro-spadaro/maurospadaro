@@ -3,6 +3,8 @@ import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
 import Link from 'next/link';
 import { getAllArticles, getArticleBySlug } from '@/lib/articles';
+import ReadingProgressBar from '@/app/components/ReadingProgressBar';
+import ArticleCard from '@/app/components/ArticleCard';
 
 export async function generateStaticParams() {
   const articles = getAllArticles();
@@ -40,15 +42,25 @@ export async function generateMetadata({ params }) {
   };
 }
 
+function formatDate(dateStr) {
+  return new Date(dateStr).toLocaleDateString('en-GB', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  });
+}
+
 export default function ArticlePage({ params }) {
   const { slug } = params;
   const article = getArticleBySlug(slug);
 
   if (!article) {
     return (
-      <div>
-        <h1>Article Not Found</h1>
-        <p>The requested article could not be found.</p>
+      <div className="min-h-screen flex items-center justify-center text-center px-4">
+        <div>
+          <h1 className="text-4xl font-bold text-gray-800 mb-4">Article not found</h1>
+          <Link href="/articles" className="text-blue-600 underline">Back to articles</Link>
+        </div>
       </div>
     );
   }
@@ -56,6 +68,13 @@ export default function ArticlePage({ params }) {
   const thumbnailUrl = article.thumbnail
     ? `https://maurospadaro.com${article.thumbnail}`
     : null;
+
+  // Related articles: same tag, exclude current
+  const allArticles = getAllArticles();
+  const tagSlugs = (article.tags || []).map(t => t.slug);
+  const related = allArticles
+    .filter(a => a.slug !== slug && (a.tags || []).some(t => tagSlugs.includes(t.slug)))
+    .slice(0, 2);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -69,10 +88,7 @@ export default function ArticlePage({ params }) {
       "@id": `https://maurospadaro.com/articles/${slug}`,
     },
     ...(thumbnailUrl && {
-      "image": {
-        "@type": "ImageObject",
-        "url": thumbnailUrl,
-      },
+      "image": { "@type": "ImageObject", "url": thumbnailUrl },
     }),
     "author": {
       "@type": "Person",
@@ -93,6 +109,7 @@ export default function ArticlePage({ params }) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      <ReadingProgressBar />
       <div className="max-w-4xl mx-auto px-4 py-16">
         <div className="text-center">
           {/* Tag */}
@@ -103,21 +120,17 @@ export default function ArticlePage({ params }) {
             >
               {article.tags[0].name}
             </Link>
-          ) : (
-            <div className="inline-block px-4 py-2 bg-gray-200 text-gray-800 rounded-full text-sm font-medium mb-4">
-              No Tag
-            </div>
-          )}
+          ) : null}
+
           {/* Title */}
           <h1 className="text-5xl font-extrabold text-gray-900 mb-4">{article.title}</h1>
           {/* Summary */}
           <p className="text-xl text-gray-600 mb-6">{article.summary}</p>
           {/* Date and Reading Time */}
           <div className="text-gray-500 text-sm mb-12">
-            {new Date(article.publishedDate).toLocaleDateString()} • {article.readingTime} min
+            {formatDate(article.publishedDate)} · {article.readingTime} min read
           </div>
 
-          {/* Separator Line */}
           <hr className="border-gray-800/20 border-t-3 max-w-3xl mx-auto mb-12" />
         </div>
 
@@ -152,6 +165,18 @@ export default function ArticlePage({ params }) {
             {article.body}
           </ReactMarkdown>
         </article>
+
+        {/* Related Articles */}
+        {related.length > 0 && (
+          <div className="mt-20 border-t border-gray-200 pt-16">
+            <h2 className="text-3xl font-extrabold text-gray-800 mb-10 text-center">More to read</h2>
+            <div className="space-y-6">
+              {related.map(a => (
+                <ArticleCard key={a.slug} article={a} />
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </>
   );

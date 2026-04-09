@@ -23,7 +23,7 @@ export default function ArticleCard({ article }) {
           <p className="text-gray-600 text-sm mb-4 hover:underline">{article.summary}</p>
         </Link>
         <p className="text-gray-500 text-sm">
-          {new Date(article.publishedDate).toLocaleDateString()} — {article.readingTime} min
+          {new Date(article.publishedDate).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })} — {article.readingTime} min read
         </p>
       </div>
     </div>

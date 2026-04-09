@@ -12,7 +12,9 @@ export default function Footer() {
           <div className="max-w-xs">
             <Link href="/" className="text-2xl font-extrabold">maurospadaro</Link>
             <p className="text-white/60 text-sm mt-3 leading-relaxed">
-              Writing about product management, fintech, and tech. PM at Perk, based in Barcelona.
+              Writing about product management, fintech, and tech. Product Manager at{' '}
+              <a href="https://www.perk.com/" target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white underline">Perk</a>
+              , based in Barcelona.
             </p>
             <div className="flex gap-4 mt-5">
               <a href="https://www.linkedin.com/in/mauro-spadaro/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">

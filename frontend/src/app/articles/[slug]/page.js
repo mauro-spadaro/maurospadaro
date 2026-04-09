@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { getAllArticles, getArticleBySlug } from '@/lib/articles';
 import ReadingProgressBar from '@/app/components/ReadingProgressBar';
 import ArticleCard from '@/app/components/ArticleCard';
-import ShareButtons from '@/app/components/ShareButtons';
 import BackToTop from '@/app/components/BackToTop';
 
 export async function generateStaticParams() {
@@ -101,7 +100,6 @@ export default function ArticlePage({ params }) {
 
       <div className="max-w-4xl mx-auto px-4 py-16">
         <div className="text-center">
-          {/* Tag */}
           {article.tags?.[0]?.name && (
             <Link
               href={`/tags/${article.tags[0].slug}`}
@@ -110,34 +108,14 @@ export default function ArticlePage({ params }) {
               {article.tags[0].name}
             </Link>
           )}
-
-          {/* Title */}
           <h1 className="text-5xl font-extrabold text-gray-900 mb-4">{article.title}</h1>
-          {/* Summary */}
           <p className="text-xl text-gray-600 mb-6">{article.summary}</p>
-          {/* Date and Reading Time */}
-          <div className="text-gray-500 text-sm mb-8">
+          <div className="text-gray-500 text-sm mb-12">
             {formatDate(article.publishedDate)} · {article.readingTime} min read
           </div>
-
-          {/* Share buttons */}
-          <ShareButtons title={article.title} slug={slug} />
-
-          <hr className="border-gray-800/20 mt-10 mb-12" />
+          <hr className="border-gray-800/20 mb-12" />
         </div>
 
-        {/* Hero thumbnail */}
-        {article.thumbnail && (
-          <div className="mb-12 rounded-2xl overflow-hidden shadow-md">
-            <img
-              src={article.thumbnail}
-              alt={article.title}
-              className="w-full h-auto object-cover"
-            />
-          </div>
-        )}
-
-        {/* Article Content */}
         <article className="container mx-auto px-4 py-2 prose prose-lg max-w-prose">
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}
@@ -169,15 +147,8 @@ export default function ArticlePage({ params }) {
           </ReactMarkdown>
         </article>
 
-        {/* Share buttons bottom */}
-        <div className="mt-12 border-t border-gray-200 pt-10">
-          <p className="text-center text-gray-600 font-medium mb-2">Enjoyed this article?</p>
-          <ShareButtons title={article.title} slug={slug} />
-        </div>
-
-        {/* Related Articles */}
         {related.length > 0 && (
-          <div className="mt-16">
+          <div className="mt-20 border-t border-gray-200 pt-16">
             <h2 className="text-3xl font-extrabold text-gray-800 mb-10 text-center">More to read</h2>
             <div className="space-y-6">
               {related.map(a => (

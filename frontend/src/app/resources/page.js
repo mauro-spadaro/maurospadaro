@@ -16,7 +16,6 @@ const COURSES = [
     url: "https://www.nondevelopers.co/",
     description:
       "The best course I've come across for PMs who want to understand how software is actually built — without becoming engineers. It gave me the vocabulary and mental models to talk confidently with any dev team. If you're breaking into product, start here.",
-    affiliate: true,
     cta: "Check it out",
   },
 ];
@@ -94,7 +93,7 @@ export default function ResourcesPage() {
 
       {/* Courses */}
       <section className="container mx-auto px-4 max-w-3xl mb-20">
-        <h2 className="text-4xl font-extrabold text-gray-800 mb-10">Courses</h2>
+        <h2 className="text-4xl font-extrabold text-gray-800 mb-10">📖 Courses</h2>
         <div className="space-y-6">
           {COURSES.map((course) => (
             <ResourceCard
@@ -102,8 +101,8 @@ export default function ResourcesPage() {
               title={course.title}
               url={course.url}
               description={course.description}
-              badge={course.affiliate ? "Affiliate" : null}
-              badgeColor="bg-blue-100 text-blue-800"
+              badge={null}
+              badgeColor=""
               cta={course.cta}
             />
           ))}
@@ -112,7 +111,7 @@ export default function ResourcesPage() {
 
       {/* People */}
       <section className="container mx-auto px-4 max-w-3xl mb-20">
-        <h2 className="text-4xl font-extrabold text-gray-800 mb-10">People to Follow</h2>
+        <h2 className="text-4xl font-extrabold text-gray-800 mb-10">🤝 People to Follow</h2>
         <div className="space-y-6">
           {PEOPLE.map((person) => (
             <ResourceCard
@@ -130,7 +129,7 @@ export default function ResourcesPage() {
 
       {/* Newsletters */}
       <section className="container mx-auto px-4 max-w-3xl mb-20">
-        <h2 className="text-4xl font-extrabold text-gray-800 mb-10">Newsletters & Blogs</h2>
+        <h2 className="text-4xl font-extrabold text-gray-800 mb-10">✉️ Newsletters & Blogs</h2>
         <div className="space-y-6">
           {NEWSLETTERS.map((nl) => (
             <ResourceCard

@@ -4,13 +4,20 @@ import matter from 'gray-matter';
 
 const ARTICLES_DIR = path.join(process.cwd(), 'content/articles');
 
+function calcReadingTime(text) {
+  const words = text.trim().split(/\s+/).length;
+  return Math.max(1, Math.round(words / 200));
+}
+
 function parseArticleFile(filename) {
   const filepath = path.join(ARTICLES_DIR, filename);
   const raw = fs.readFileSync(filepath, 'utf-8');
   const { data, content } = matter(raw);
+  const body = content.trim();
   return {
     ...data,
-    body: content.trim(),
+    body,
+    readingTime: calcReadingTime(body),
   };
 }
 

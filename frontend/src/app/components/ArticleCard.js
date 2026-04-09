@@ -1,10 +1,7 @@
 import Link from "next/link";
 
 export default function ArticleCard({ article }) {
-  // Thumbnail may be a relative path (from old Strapi) or an absolute URL (Cloudinary etc.)
-  const thumbnailSrc = article.thumbnail?.startsWith('http')
-    ? article.thumbnail
-    : `https://maurospadaro.com${article.thumbnail}`;
+  const thumbnailSrc = article.thumbnail || null;
 
   return (
     <div className="bg-gray-300 rounded-lg shadow-lg p-6 flex flex-col md:flex-row items-center gap-6 max-w-3xl mx-auto mb-8 cursor-pointer hover:bg-gray-300 transition">

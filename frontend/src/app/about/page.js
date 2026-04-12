@@ -2,6 +2,7 @@ export const metadata = {
   title: "About me",
   description:
     "Meet Mauro Spadaro — Product Manager at Perk, tech enthusiast, and writer on product management and digital innovation.",
+  alternates: { canonical: "https://maurospadaro.com/about" },
   openGraph: {
     title: "About me | maurospadaro",
     description:

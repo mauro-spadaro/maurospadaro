@@ -53,6 +53,12 @@ export default function Navbar() {
                         Articles ✍️
                     </Link>
                     <Link
+                        href="/projects"
+                        className="relative px-4 py-2 rounded-full text-white hover:bg-[#93C1D9]/20 transition duration-300"
+                    >
+                        Projects 🛠️
+                    </Link>
+                    <Link
                         href="/resources"
                         className="relative px-4 py-2 rounded-full text-white hover:bg-[#93C1D9]/20 transition duration-300"
                     >
@@ -78,6 +84,12 @@ export default function Navbar() {
                     className="block py-2 text-white hover:bg-[#93C1D9]/20 hover:underline rounded transition duration-300 text-center"
                 >
                     Articles ✍️
+                </Link>
+                <Link
+                    href="/projects"
+                    className="block py-2 text-white hover:bg-[#93C1D9]/20 hover:underline rounded transition duration-300 text-center"
+                >
+                    Projects 🛠️
                 </Link>
                 <Link
                     href="/resources"

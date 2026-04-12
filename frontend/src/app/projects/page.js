@@ -124,29 +124,31 @@ function ProjectCard({ project }) {
         )}
       </div>
 
-      {/* What */}
-      <div className="mb-6">
-        <h3 className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-2">The problem</h3>
-        <p className="text-gray-700 text-lg leading-relaxed">{project.what}</p>
-      </div>
+      <div className="divide-y divide-gray-200 border-t border-gray-200 mt-8">
+        {/* What */}
+        <div className="py-6">
+          <h3 className="text-sm font-bold text-[#0C1C5A] mb-3">🎯 The problem</h3>
+          <p className="text-gray-700 text-lg leading-relaxed">{project.what}</p>
+        </div>
 
-      {/* What I did */}
-      <div className="mb-6">
-        <h3 className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-2">What I did</h3>
-        <p className="text-gray-700 text-lg leading-relaxed">{project.did}</p>
-      </div>
+        {/* What I did */}
+        <div className="py-6">
+          <h3 className="text-sm font-bold text-[#0C1C5A] mb-3">🔧 What I did</h3>
+          <p className="text-gray-700 text-lg leading-relaxed">{project.did}</p>
+        </div>
 
-      {/* Outcomes */}
-      <div>
-        <h3 className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-3">Outcomes</h3>
-        <ul className="space-y-2">
-          {project.outcomes.map((outcome, i) => (
-            <li key={i} className="flex items-start gap-3 text-gray-700 text-base">
-              <span className="text-[#0C1C5A] font-bold mt-0.5">→</span>
-              {outcome}
-            </li>
-          ))}
-        </ul>
+        {/* Outcomes */}
+        <div className="py-6">
+          <h3 className="text-sm font-bold text-[#0C1C5A] mb-4">📈 Outcomes</h3>
+          <ul className="space-y-3">
+            {project.outcomes.map((outcome, i) => (
+              <li key={i} className="flex items-start gap-3 text-gray-700 text-base">
+                <span className="bg-[#0C1C5A] text-white text-xs font-bold px-2 py-0.5 rounded-full mt-0.5 shrink-0">→</span>
+                {outcome}
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
   );

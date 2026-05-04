@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "drafts/New article idea.md",
+                "file": "drafts/fear-of-ai-draft-v5.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "New article idea"
+              "title": "fear-of-ai-draft-v5"
             }
           }
         ]
@@ -183,8 +183,9 @@
   },
   "active": "8adc2fc4f0060aab",
   "lastOpenFiles": [
-    "templates/article.md",
     "drafts/New article idea.md",
+    "drafts/fear-of-ai-draft-v5.md",
+    "templates/article.md",
     "templates",
     "drafts"
   ]

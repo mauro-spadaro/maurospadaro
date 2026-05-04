@@ -33,7 +33,8 @@
       "Bash(sips -g pixelWidth -g pixelHeight ~/Downloads/\"Group 8.png\")",
       "WebSearch",
       "Bash(mkdir -p /Users/spada/Desktop/maurospadaro/frontend/content/drafts)",
-      "Bash(touch /Users/spada/Desktop/maurospadaro/frontend/content/drafts/.gitkeep)"
+      "Bash(touch /Users/spada/Desktop/maurospadaro/frontend/content/drafts/.gitkeep)",
+      "mcp__claude_ai_Google_Drive__list_recent_files"
     ]
   }
 }

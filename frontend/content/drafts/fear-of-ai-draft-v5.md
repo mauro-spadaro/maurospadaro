@@ -4,17 +4,17 @@
 
 ---
 
-# TL;DR (you should!)
+# TL;DR
 
 😰 Lately, every conversation I have about AI circles back to the same feeling. People feel behind, and a little fearful of what AI might bring.
 
 📱 A lot of that FOMO is manufactured. The LinkedIn AI guru economy runs on your insecurity, and it is working exactly as designed.
 
-🤔 Strip the noise away though, and there is still a real signal underneath. AI is genuinely changing how we work, and ignoring that does not make it go away.
+🤔 Strip the noise away though. AI is genuinely changing how we work, and ignoring that does not make it go away.
 
 🚀 The trick is to stop treating that signal as a threat and start treating it as an opportunity. A friend of mine running a sportswear Shopify shop is the proof.
 
-🤝 Embrace the tension. Be scrappy. You do not need the perfect plan to start.
+🤝 Embrace the tension. Be scrappy. You do not need the perfect plan to start. There's never gonna be 'enough' podcasts, articles or resources to allow you to start.
 
 ---
 

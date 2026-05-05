@@ -1,7 +1,12 @@
-# Fear of AI
-
-*A few thoughts on FOMO, LinkedIn gurus, and a friend of mine running a Shopify shop.*
-
+---
+title: "Fear of AI"
+slug: "fear-of-ai"
+summary: "A few thoughts on FOMO, LinkedIn gurus, and a friend of mine running a Shopify shop."
+publishedDate: "2026-05-04"
+thumbnail: "/uploads/fear-of-ai-thumbnail.png"
+tags:
+  - name: "🤖 AI & Tech"
+    slug: "ai-tech"
 ---
 
 # TL;DR

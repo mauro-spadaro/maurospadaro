@@ -23,7 +23,9 @@ function parseArticleFile(filename) {
 
 export function getAllArticles() {
   const files = fs.readdirSync(ARTICLES_DIR).filter(f => f.endsWith('.md'));
-  const articles = files.map(parseArticleFile);
+  // Only articles whose frontmatter says `published: true` go live.
+  // Anything else (missing, false, a typo) stays hidden, even inside content/articles.
+  const articles = files.map(parseArticleFile).filter(a => a.published === true);
   // Sort by publishedDate descending
   articles.sort((a, b) => new Date(b.publishedDate) - new Date(a.publishedDate));
   return articles;

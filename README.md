@@ -51,6 +51,7 @@ Articles live in `frontend/content/articles/` as `.md` files with YAML frontmatt
 title: "Your Article Title"
 slug: "your-article-slug"
 summary: "One line summary"
+published: true          # must be true to go live
 publishedDate: "2026-04-12"
 thumbnail: "/uploads/your-image.png"
 tags:
@@ -64,7 +65,8 @@ Article body in markdown...
 **Workflow:**
 1. Write in `drafts/` (invisible to the site)
 2. Move to `articles/` when ready to publish
-3. Push to `main` → Vercel deploys automatically
+3. Set `published: true` in the frontmatter. Without it the article stays hidden, even in `articles/`
+4. Push to `main` → Vercel deploys automatically
 
 Images go in `frontend/public/uploads/` and are referenced as `/uploads/filename.jpg`.
 

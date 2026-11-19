@@ -68,6 +68,8 @@ Article body in markdown...
 3. Set `published: true` in the frontmatter. Without it the article stays hidden, even in `articles/`
 4. Push to `main` → Vercel deploys automatically
 
+Obsidian Git commits and pushes automatically about every 10 minutes. Before writing, pull the latest changes with the command palette: **Git: Pull**.
+
 Images go in `frontend/public/uploads/` and are referenced as `/uploads/filename.jpg`.
 
 ## Environment variables

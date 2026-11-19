@@ -4,6 +4,7 @@ slug: "how-did-I-end-up-into-product-management"
 summary: "A few lessons learned along my short-lived early professional life."
 publishedDate: "2024-01-29"
 readingTime: 15
+published: true
 thumbnail: "/uploads/Articles_a9021f1c8e.png"
 tags:
   - name: "🌷 Personal Growth"
